@@ -23,9 +23,7 @@ from transcribe.plugins.plugin_manager import PluginManager
 class UpperPlugin(AbstractPlugin):
     """A test plugin that uppercases transcript text."""
 
-    @property
-    def name(self) -> str:
-        return "upper"
+    name: str = "upper"
 
     async def post_process(self, result: TranscriptResult) -> TranscriptResult:
         result.text = result.text.upper()
@@ -41,9 +39,7 @@ class PrefixPlugin(AbstractPlugin):
         super().__init__()
         self._prefix = prefix
 
-    @property
-    def name(self) -> str:
-        return "prefix"
+    name: str = "prefix"
 
     async def post_process(self, result: TranscriptResult) -> TranscriptResult:
         result.text = self._prefix + result.text
@@ -53,9 +49,7 @@ class PrefixPlugin(AbstractPlugin):
 class AudioSilencerPlugin(AbstractPlugin):
     """A test plugin that silences audio (returns empty bytes)."""
 
-    @property
-    def name(self) -> str:
-        return "silencer"
+    name: str = "silencer"
 
     async def pre_process(self, audio: bytes) -> bytes:
         return b""
@@ -64,9 +58,7 @@ class AudioSilencerPlugin(AbstractPlugin):
 class DoubleAudioPlugin(AbstractPlugin):
     """A test plugin that doubles audio bytes."""
 
-    @property
-    def name(self) -> str:
-        return "doubler"
+    name: str = "doubler"
 
     async def pre_process(self, audio: bytes) -> bytes:
         return audio * 2
@@ -75,9 +67,7 @@ class DoubleAudioPlugin(AbstractPlugin):
 class ErrorPlugin(AbstractPlugin):
     """A test plugin that raises in ``pre_process``."""
 
-    @property
-    def name(self) -> str:
-        return "error"
+    name: str = "error"
 
     async def pre_process(self, audio: bytes) -> bytes:
         msg = "intentional failure"
@@ -91,9 +81,7 @@ class TrackCallPlugin(AbstractPlugin):
         super().__init__()
         self.call_log: list[str] = []
 
-    @property
-    def name(self) -> str:
-        return "tracker"
+    name: str = "tracker"
 
     async def setup(self, config: EngineConfig, plugin_config: dict | None = None) -> None:
         self.call_log.append("setup")
@@ -320,7 +308,9 @@ class TestPluginManagerLifecycle:
         """``setup_all`` calls ``setup`` on every registered plugin."""
         mgr = PluginManager()
         tracker1 = TrackCallPlugin()
+        tracker1.name = "tracker-1"
         tracker2 = TrackCallPlugin()
+        tracker2.name = "tracker-2"
         mgr.register(tracker1)
         mgr.register(tracker2)
         await mgr.setup_all(config)

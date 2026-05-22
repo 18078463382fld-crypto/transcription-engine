@@ -47,7 +47,7 @@ class TranscriptSegment:
 
     start: float
     end: float
-    text: str
+    text: str = ""
     confidence: float = 1.0
     speaker: Optional[str] = None
     metadata: dict[str, object] = field(default_factory=dict)

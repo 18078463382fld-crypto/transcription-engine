@@ -9,7 +9,6 @@ the transcription pipeline.
 
 from __future__ import annotations
 
-import abc
 import logging
 from typing import Any
 
@@ -44,10 +43,8 @@ class AbstractPlugin(TranscriptionPlugin):
 
     # ── Plugin metadata ────────────────────────────────────────────
 
-    @property
-    @abc.abstractmethod
-    def name(self) -> str:
-        """Unique, human-readable plugin name (e.g. ``\"vad-filter\"``)."""
+    name: str = "abstract-plugin"
+    """Unique, human-readable plugin name. Subclasses **must** override this."""
 
     priority: int = 100
     enabled: bool = True
