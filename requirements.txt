@@ -1,0 +1,22 @@
+# ============================================================
+# transcribe-engine — dependency quick-reference
+# ============================================================
+# Install minimal:  pip install -r requirements.txt
+# Install all:     pip install -e ".[full]"
+
+# Core (always required)
+numpy>=1.24
+soundfile>=0.12
+pydub>=0.25
+
+# Local Whisper (install with: pip install -e ".[local]")
+openai-whisper>=20231117
+torch>=2.0
+
+# Cloud API  (install with: pip install -e ".[cloud]")
+openai>=1.0
+httpx>=0.25
+
+# Streaming / microphone (pip install -e ".[stream]")
+sounddevice>=0.4
+pyaudio>=0.2
